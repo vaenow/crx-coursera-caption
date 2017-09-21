@@ -1,0 +1,16 @@
+
+.video-right {
+    position: fixed;
+    right: 0;
+    top: 65px;
+    width: 45%;
+}
+
+.caption-left {
+    width: 55%;
+    margin-left: 10px;
+}
+
+.styleguide-hide {
+	display: none;
+}
