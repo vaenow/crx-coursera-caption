@@ -21,7 +21,8 @@ chrome.runtime.onMessage.addListener(function(msg, sender, response) {
 function startLayout(isSwitched) {
 	if (!isSwitched) {
 		// 收起drawer
-		$('.drawer-open').removeClass('drawer-open')
+		// $('.drawer-open').removeClass('drawer-open')
+		$(".side-nav-button").click()
 
 		// 隐藏 "下载"
 		$('.styleguide').hide()
@@ -38,7 +39,8 @@ function startLayout(isSwitched) {
 	
 	} else {
 		// 收起drawer
-		$('.drawer-open').addClass('drawer-open')
+		// $('.drawer-open').addClass('drawer-open')
+		$(".side-nav-button").click()
 
 		// 隐藏 "下载"
 		$('.styleguide').show()

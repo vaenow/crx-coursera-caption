@@ -1,23 +1,19 @@
 {
-  "name": "crx-rm-a-target",
-  "version": "1.0.0",
-  "description": "Remove tagA's target",
+  "name": "crx-coursera-caption",
+  "version": "1.0.2",
+  "description": "Coursera Caption",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vaenow/crx-url-append-port.git"
+    "url": "git+https://github.com/vaenow/crx-coursera-caption.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "luowenbiz@gmail.com",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vaenow/crx-url-append-port/issues"
+    "url": "https://github.com/vaenow/crx-coursera-caption/issues"
   },
-  "homepage": "https://github.com/vaenow/crx-url-append-port#readme",
-  "dependencies": {
-    "jquery": "^3.2.1",
-    "tether": "^1.4.0"
-  }
+  "homepage": "https://github.com/vaenow/crx-coursera-caption#readme"
 }

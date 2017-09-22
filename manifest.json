@@ -1,6 +1,6 @@
 {
   "name": "Cousera Caption",
-  "version": "0.2",
+  "version": "0.3",
   "manifest_version": 2,
   "description": "Relayout Coursera Caption",
   "icons": {
@@ -25,7 +25,7 @@
     {
       "matches": ["*://*.coursera.org/*"],
       "css": ["css/contentstyle.css"],
-      "js": ["js/jquery.slim.min.js", "js/tether.min.js", "js/contentscript.js"],
+      "js": ["js/jquery.slim.min.js", "js/contentscript.js"],
       "run_at": "document_end"
     }
   ]
