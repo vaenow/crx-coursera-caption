@@ -11,15 +11,15 @@ chrome.runtime.onMessage.addListener(function(msg, sender, response) {
 		msgResp.info = 'Redirecting..'
 
 		injectCSS()
-		startLayout()
+		startLayout(isSwitched())
 
-		response("Bravo!");
+		response("Bravo! ❄️");
 	}
 });
 
 
-function startLayout(isRestore) {
-	if (!isRestore) {
+function startLayout(isSwitched) {
+	if (!isSwitched) {
 		// 收起drawer
 		$('.drawer-open').removeClass('drawer-open')
 
@@ -33,6 +33,8 @@ function startLayout(isRestore) {
 		$('.content-container > .video-container').addClass('video-right')
 		$('.content-container > .video-container > div').addClass('video-right')
 		$('.content-container > .video-container > div .video-js').addClass('video-right')
+		$('.content-container > .video-container   .c-video-title').hide()
+		
 	
 	} else {
 		// 收起drawer
@@ -48,12 +50,16 @@ function startLayout(isRestore) {
 		$('.content-container > .video-container').removeClass('video-right')
 		$('.content-container > .video-container > div').removeClass('video-right')
 		$('.content-container > .video-container > div .video-js').removeClass('video-right')
-
+		$('.content-container > .video-container   .c-video-title').show()
 	}
 }
 
+function isSwitched() {
+	return !!$('.video-right').length
+}
+
 function injectCSS() {
-	if($('#layoutui').html()) return;
+	if($('#layoutui').html()) return ;
 
 	$('head').append('<style type="text/css" id="layoutui">.video-right {    position: fixed;    right: 0;    top: 65px;    width: 45%;	height: 100%;}.caption-left {    width: 55%;    margin-left: 10px !important;}.styleguide-hide {	display: none;}</style>')
 }

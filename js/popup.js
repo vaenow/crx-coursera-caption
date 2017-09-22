@@ -1,6 +1,7 @@
 function setDOMInfo(resp) {
   // var info = skipRemove ? '跳转'
-  document.getElementById('check').innerHTML = resp;
+  var respMsg = typeof resp !== 'string' ? 'Switching...' : resp
+  document.getElementById('check').innerHTML = respMsg;
 }
 
 // Once the DOM is ready...
