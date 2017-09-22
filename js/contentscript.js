@@ -13,26 +13,47 @@ chrome.runtime.onMessage.addListener(function(msg, sender, response) {
 		injectCSS()
 		startLayout()
 
-		response(JSON.stringify(msgResp));
+		response("Bravo!");
 	}
 });
 
 
-function startLayout() {
-	// 收起drawer
-	$('.drawer-open').removeClass('drawer-open')
+function startLayout(isRestore) {
+	if (!isRestore) {
+		// 收起drawer
+		$('.drawer-open').removeClass('drawer-open')
 
-	// 隐藏 "下载"
-	$('.styleguide').hide()
+		// 隐藏 "下载"
+		$('.styleguide').hide()
 
-	// 字幕放左
-	$('.content-container > .horizontal-box').addClass('caption-left')
+		// 字幕放左
+		$('.content-container > .horizontal-box').addClass('caption-left')
 
-	// 视频放右
-	$('.content-container > .video-container').addClass('video-right')
+		// 视频放右
+		$('.content-container > .video-container').addClass('video-right')
+		$('.content-container > .video-container > div').addClass('video-right')
+		$('.content-container > .video-container > div .video-js').addClass('video-right')
+	
+	} else {
+		// 收起drawer
+		$('.drawer-open').addClass('drawer-open')
+
+		// 隐藏 "下载"
+		$('.styleguide').show()
+
+		// 字幕放左
+		$('.content-container > .horizontal-box').removeClass('caption-left')
+
+		// 视频放右
+		$('.content-container > .video-container').removeClass('video-right')
+		$('.content-container > .video-container > div').removeClass('video-right')
+		$('.content-container > .video-container > div .video-js').removeClass('video-right')
+
+	}
 }
 
 function injectCSS() {
+	if($('#layoutui').html()) return;
 
-	$('head').append('<style type="text/css">.video-right {    position: fixed;    right: 0;    top: 65px;    width: 45%;}.caption-left {    width: 55%;    margin-left: 10px;}.styleguide-hide {	display: none;}</style>')
+	$('head').append('<style type="text/css" id="layoutui">.video-right {    position: fixed;    right: 0;    top: 65px;    width: 45%;	height: 100%;}.caption-left {    width: 55%;    margin-left: 10px !important;}.styleguide-hide {	display: none;}</style>')
 }
