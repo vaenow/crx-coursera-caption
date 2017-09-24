@@ -1,6 +1,6 @@
 {
   "name": "crx-coursera-caption",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Coursera Caption",
   "main": "index.js",
   "scripts": {

@@ -21,8 +21,9 @@ chrome.runtime.onMessage.addListener(function(msg, sender, response) {
 function startLayout(isSwitched) {
 	if (!isSwitched) {
 		// 收起drawer
-		// $('.drawer-open').removeClass('drawer-open')
-		$(".side-nav-button").click()
+		if($('.drawer-open').length) {
+			$(".side-nav-button").click()
+		}
 
 		// 隐藏 "下载"
 		$('.styleguide').hide()
@@ -38,9 +39,10 @@ function startLayout(isSwitched) {
 		
 	
 	} else {
-		// 收起drawer
-		// $('.drawer-open').addClass('drawer-open')
-		$(".side-nav-button").click()
+		// 展开drawer
+		if(!$('.drawer-open').length) {
+			$(".side-nav-button").click()
+		}
 
 		// 隐藏 "下载"
 		$('.styleguide').show()
@@ -63,5 +65,5 @@ function isSwitched() {
 function injectCSS() {
 	if($('#layoutui').html()) return ;
 
-	$('head').append('<style type="text/css" id="layoutui">.video-right {    position: fixed;    right: 0;    top: 65px;    width: 45%;	height: 100%;}.caption-left {    width: 55%;    margin-left: 10px !important;}.styleguide-hide {	display: none;}</style>')
+	$('head').append('<style type="text/css" id="layoutui">.video-right {    position: fixed;    right: 0;    top: 65px;    width: 45% !important;	height: 100%;}.caption-left {    width: 55%;    margin-left: 10px !important;}.styleguide-hide {	display: none;}</style>')
 }
