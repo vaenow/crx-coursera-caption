@@ -2,14 +2,13 @@
 .video-right {
     position: fixed;
     right: 0;
-    top: 65px;
-    width: 45%;
+    width: 45% !important;
     height: 100%;
 }
 
 .caption-left {
     width: 55%;
-    margin-left: 10px;
+    margin-left: 10px !important;
 }
 
 .styleguide-hide {

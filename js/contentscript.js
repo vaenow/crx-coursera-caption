@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener(function(msg, sender, response) {
 		var msgResp = {};
 		msgResp.info = 'Redirecting..'
 
-		injectCSS()
+		//injectCSS()
 		startLayout(isSwitched())
 
 		response("Bravo! ❄️");
@@ -60,10 +60,4 @@ function startLayout(isSwitched) {
 
 function isSwitched() {
 	return !!$('.video-right').length
-}
-
-function injectCSS() {
-	if($('#layoutui').html()) return ;
-
-	$('head').append('<style type="text/css" id="layoutui">.video-right {    position: fixed;    right: 0;    top: 65px;    width: 45% !important;	height: 100%;}.caption-left {    width: 55%;    margin-left: 10px !important;}.styleguide-hide {	display: none;}</style>')
 }
