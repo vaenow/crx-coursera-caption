@@ -9,7 +9,7 @@
 	display: none;
 }
 
-@media (max-width:991px) {
+@media (max-width:1030px) {
 	#rendered-content .video-right {
 	    position: fixed;
 	    right: 0;
@@ -18,7 +18,7 @@
 	    height: 100%;
 	}
 }
-@media (min-width:991px) {
+@media (min-width:1030px) {
 	#rendered-content .video-right {
 	    position: fixed;
 	    right: 0;
