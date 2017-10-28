@@ -13,6 +13,21 @@ module.exports = {
     path: __dirname + "/dist",
     filename: "js/[name].min.js"
   },
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      exclude: ['node_modules'],
+      loader: 'babel-loader',
+      query: {
+        babelrc: false,
+        presets: [
+          ['es2015', {
+            modules: false
+          }]
+        ],
+      },
+    }],
+  },
   plugins: debug ? [
     new CopyWebpackPlugin([
       {from: 'index.html'},
