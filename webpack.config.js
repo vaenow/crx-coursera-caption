@@ -15,7 +15,7 @@ module.exports = {
   },
   plugins: debug ? [
     new CopyWebpackPlugin([
-      {from: 'popup.html'},
+      {from: 'index.html'},
       {from: 'manifest.json'},
       {from: 'img', to: 'img'},
       {from: 'css', to: 'css'},
