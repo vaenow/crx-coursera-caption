@@ -1,36 +1,87 @@
-chrome.runtime.onMessage.addListener(function(msg, sender, response) {
-	if ((msg.from === 'popup')) {
-		switch (msg.subject) {
-			case 'switchLayout':
-				handleSwitchLayout(msg, response);
-				break;
-			case 'getWebStore':
-				handleGetWebStore(msg, response);
-				break;
+chrome.runtime.onMessage.addListener(function({
+	from,
+	subject
+}, sender, response) {
+	const resp = responseWrapper(response)
+	const subj = JSON.parse(subject)
 
-		}
+	switch (from) {
+		case 'getWebStore':
+			handleGetWebStore(subj, resp);
+			break;
+		case 'switchLayout':
+			handleSwitchLayout(subj, resp);
+			break;
+		case 'switchTranslate':
+			handleSwitchTranslate(subj, resp);
+			break;
 	}
 });
 
-// ======================= //
-
-function handleGetWebStore(msg, response) {
-	console.log('got message, handleGetWebStore', msg)
-
-	response("ok");
+// ======================= // Utils
+var STORE = 'coursera'
+var STORE_DEFAULT = {
+	layout: {
+		checked: false
+	},
+	translate: {
+		checked: false
+	},
 }
 
-function handleSwitchLayout(msg, response) {
+function responseWrapper(response) {
+	return function(msg) {
+		return response(JSON.stringify(msg))
+	}
+}
 
-	console.log('got message', msg)
+function getStore() {
+	return JSON.parse(localStorage.getItem(STORE)) || STORE_DEFAULT
+}
 
-	var msgResp = {};
-	msgResp.info = 'Redirecting..'
+function updateStore(store) {
+	localStorage.setItem(STORE, JSON.stringify(store))
+}
+
+// ======================= // Handle
+
+function handleGetWebStore({checked}, response) {
+	// console.log('got message, handleGetWebStore', msg)
+	response(getStore());
+}
+
+function handleSwitchLayout({checked}, response) {
+
+	console.log('got message', checked)
+
+	// var msgResp = {};
+	// msgResp.info = 'Redirecting..'
 
 	//injectCSS()
-	startLayout(isSwitched())
+	// const switched = isSwitched()
 
-	response("Bravo! ❄️");
+	// if (checked !== switched) {
+	startLayout(isSwitched())
+		// }
+	let store = getStore()
+	store.layout.checked = checked;
+	updateStore(store)
+
+	response({
+		code: 200,
+		msg: "Bravo! ❄️"
+	});
+}
+
+function handleSwitchTranslate({checked}, response) {
+	let store = getStore()
+	store.translate.checked = checked;
+	updateStore(store)
+
+	response({
+		code: 200,
+		msg: 'cool'
+	})
 }
 
 // ======================= //
