@@ -1,27 +1,44 @@
-console.log("ReLayout Caption 1", $.isReady)
-
 chrome.runtime.onMessage.addListener(function(msg, sender, response) {
-	//   debugger;
-	//   // First, validate the message's structure
-	if ((msg.from === 'popup') && (msg.subject === 'parseImg')) {
+	if ((msg.from === 'popup')) {
+		switch (msg.subject) {
+			case 'switchLayout':
+				handleSwitchLayout(msg, response);
+				break;
+			case 'getWebStore':
+				handleGetWebStore(msg, response);
+				break;
 
-		console.log('got message', msg)
-
-		var msgResp = {};
-		msgResp.info = 'Redirecting..'
-
-		//injectCSS()
-		startLayout(isSwitched())
-
-		response("Bravo! ❄️");
+		}
 	}
 });
 
+// ======================= //
+
+function handleGetWebStore(msg, response) {
+	console.log('got message, handleGetWebStore', msg)
+
+	response("ok");
+}
+
+function handleSwitchLayout(msg, response) {
+
+	console.log('got message', msg)
+
+	var msgResp = {};
+	msgResp.info = 'Redirecting..'
+
+	//injectCSS()
+	startLayout(isSwitched())
+
+	response("Bravo! ❄️");
+}
+
+// ======================= //
 
 function startLayout(isSwitched) {
 	if (!isSwitched) {
 		// 收起drawer
-		if($('.drawer-open').length) {
+		if ($('.drawer-open').length) {
 			$(".side-nav-button").click()
 		}
 
@@ -36,11 +53,11 @@ function startLayout(isSwitched) {
 		$('.content-container > .video-container > div').addClass('video-right')
 		$('.content-container > .video-container > div .video-js').addClass('video-right')
 		$('.content-container > .video-container   .c-video-title').hide()
-		
-	
+
+
 	} else {
 		// 展开drawer
-		if(!$('.drawer-open').length) {
+		if (!$('.drawer-open').length) {
 			$(".side-nav-button").click()
 		}
 

@@ -15,7 +15,7 @@ window.tjs2 = tjs
 const MAX_T_LEN = 4000
 
 const intervalNum = setInterval(() => {
-	console.log('detecting <video>...')
+	// console.log('detecting <video>...')
 	const captionInfo = getCaptionInfo()
 	if (captionInfo) {
 		clearInterval(intervalNum)
@@ -23,8 +23,13 @@ const intervalNum = setInterval(() => {
 	}
 }, 500)
 
+setTimeout(() => {
+	// No video
+	clearInterval(intervalNum)
+}, 60 * 1000)
+
 function goTranslateAndInsert(captionInfo, captionIndexRange = [0, 0]) {
-	console.log('goTranslateAndInsert', captionIndexRange)
+	// console.log('goTranslateAndInsert', captionIndexRange)
 
 	let content = ''
 	for (let i = captionIndexRange[0]; i < captionInfo.captions.length; i++) {
@@ -68,21 +73,18 @@ function getCaptionInfo() {
 function go(content) {
 	return tjs
 		.translate(content.toLowerCase())
-		.then(resp => {
-			console.log('tjs result:', resp.result) // result 的数据结构见下文
-			return resp
-		})
+		.then(resp => resp)
 }
 
 function insertCaption(result, {vtts, SEPARATOR, tt}, captionIndexRange) {
 	const content = result.join('')
 	const captions = content.split("%%")
-	console.log('captions', captions)
+	// console.log('captions', captions)
 
 	const cues = Array.from(tt.cues)
 
 	for (let i = captionIndexRange[0]; i<captionIndexRange[1]; i++) {
-		console.log('cues[i]', i)
+		// console.log('cues[i]', i)
 		cues[i].text += `\n${findProperCaption(i, captions)}`
 	}
 }

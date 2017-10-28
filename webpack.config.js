@@ -8,6 +8,7 @@ module.exports = {
   devtool: debug ? "inline-sourcemap" : null,
   entry: {
     app: "./js/app.js",
+    contentScript: "./js/contentscript.js",
   },
   output: {
     path: __dirname + "/dist",

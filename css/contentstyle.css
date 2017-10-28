@@ -27,3 +27,13 @@
 	    height: 100%;
 	}
 }
+
+.container-course {
+	display: flex;
+	flex-direction: column;
+	padding: 5px;
+}
+
+.container-course > button {
+	margin-top: 5px;
+}

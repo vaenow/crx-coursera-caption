@@ -27,8 +27,8 @@
       "css": ["css/contentstyle.css"],
       "js": [
         "js/lib/jquery.slim.min.js",
-        "js/contentscript.js",
-        "js/app.min.js"
+        "js/app.min.js",
+        "js/contentscript.min.js"
       ],
       "run_at": "document_end"
     }
