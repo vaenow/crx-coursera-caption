@@ -1,7 +1,7 @@
 {
   "name": "crx-coursera-caption",
-  "version": "1.0.6",
-  "description": "Coursera Caption",
+  "version": "1.1.7",
+  "description": "A friendly UI layout for Coursera caption",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,10 +10,20 @@
     "type": "git",
     "url": "git+https://github.com/vaenow/crx-coursera-caption.git"
   },
-  "author": "luowenbiz@gmail.com",
+  "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/vaenow/crx-coursera-caption/issues"
   },
-  "homepage": "https://github.com/vaenow/crx-coursera-caption#readme"
+  "homepage": "https://github.com/vaenow/crx-coursera-caption#readme",
+  "dependencies": {
+    "google-translate-api": "^2.3.0",
+    "translation.js": "^0.6.4"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.17",
+    "copy-webpack-plugin": "^4.2.0",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.3"
+  }
 }
