@@ -1,5 +1,9 @@
 import startLayout, {isSwitched} from './layout'
-import translate, {isTranslated} from './tsl'
+import translate, {
+	isTranslated,
+	startTranslate,
+	afterVideoReady
+} from './tsl'
 
 chrome.runtime.onMessage.addListener(function({
 	from,
@@ -20,6 +24,20 @@ chrome.runtime.onMessage.addListener(function({
 			break;
 	}
 });
+
+function initSavedConfig() {
+	afterVideoReady((captionInfo) => {
+		const store = getStore()
+		if (store.translate.checked) {
+			startTranslate(captionInfo)
+		}
+		if (store.layout.checked) {
+			startLayout(true)
+		}
+	})
+}
+
+initSavedConfig()
 
 // ======================= // Utils
 var STORE = 'coursera'
@@ -57,7 +75,7 @@ function handleSwitchLayout({checked}, response) {
 
 	const switched = isSwitched()
 	if (checked !== switched){
-		startLayout(switched)
+		startLayout(checked)
 	}
 
 	let store = getStore()

@@ -1,6 +1,6 @@
 
-export default function startLayout(isSwitched) {
-	if (!isSwitched) {
+export default function startLayout(checked) {
+	if (checked) {
 		// 收起drawer
 		if ($('.drawer-open').length) {
 			$(".side-nav-button").click()

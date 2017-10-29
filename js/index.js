@@ -60,19 +60,19 @@ function messager(msg) {
 
 // ======================= //
 
-function setDOMInfo(resp) {
-  // var info = skipRemove ? '跳转'
-  // var respMsg = 'Switching...';
-  // if (typeof resp === 'string') {
-  //   respMsg = resp;
-  //   $('#check').addClass('btn-primary')
-  // }
-  // document.getElementById('check').innerHTML = respMsg;
-}
+// function setDOMInfo(resp) {
+//   // var info = skipRemove ? '跳转'
+//   // var respMsg = 'Switching...';
+//   // if (typeof resp === 'string') {
+//   //   respMsg = resp;
+//   //   $('#check').addClass('btn-primary')
+//   // }
+//   // document.getElementById('check').innerHTML = respMsg;
+// }
 
-function setAutoTranslate(resp) {
+// function setAutoTranslate(resp) {
 
-}
+// }
 
 
 function getWebStore() {
@@ -93,8 +93,8 @@ function switchLayout(evt, checked) {
   messager({
     from: 'switchLayout',
     subject: {checked},
-    beforeSend: setDOMInfo,
-    afterSend: setDOMInfo
+    // beforeSend: setDOMInfo,
+    // afterSend: setDOMInfo
   })
 }
 
@@ -102,6 +102,6 @@ function switchTranslate(evt, checked) {
   messager({
     from: 'switchTranslate',
     subject: {checked},
-    afterSend: setAutoTranslate
+    // afterSend: setAutoTranslate
   })
 }

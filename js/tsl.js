@@ -10,7 +10,6 @@
 // });
 
 const tjs = require('translation.js')
-window.tjs2 = tjs
 
 const MAX_T_LEN = 4000
 let intervalNum = 0
@@ -19,33 +18,71 @@ let captionCache = {
 	vtts: {},
 	en: [],
 	cn: [],
+};
+
+export default function tsl(isTranslate) {
+	// if (intervalNum) clearInterval(intervalNum)
+
+	// intervalNum = setInterval(() => {
+	// 	// console.log('detecting <video>...')
+	// 	if (!isTranslate) {
+	// 		captionCache.isTranslate = false
+	// 		clearInterval(intervalNum)
+	// 		return resetCaption()
+	// 	}
+
+
+	// 	// use cn cache
+	// 	if (captionCache.cn.length) {
+	// 		captionCache.isTranslate = true
+	// 		clearInterval(intervalNum)
+	// 		resetCaption()
+	// 		return insertCaption(captionCache.cn, captionCache, [0, captionCache.en.length])
+	// 	}
+		
+	// 	const captionInfo = getCaptionInfo()
+	// 	if (captionInfo) {
+	// 		captionCache.isTranslate = true
+	// 		clearInterval(intervalNum)
+	// 		goTranslateAndInsert(captionInfo)
+	// 	}
+	// }, 500)
+
+	// setTimeout(() => {
+	// 	// No video
+	// 	clearInterval(intervalNum)
+	// }, 60 * 1000)
+
+	if (!isTranslate) {
+		captionCache.isTranslate = false
+		// clearInterval(intervalNum)
+		return resetCaption()
+	} else if (captionCache.cn.length) { // use cn cache
+		captionCache.isTranslate = true
+		// clearInterval(intervalNum)
+		resetCaption()
+		return insertCaption(captionCache.cn, captionCache, [0, captionCache.en.length])
+	} else {
+		const captionInfo = getCaptionInfo()
+		startTranslate(captionInfo)
+	}
+
+	// const captionInfo = getCaptionInfo()
+	// if (captionInfo) {
+		// captionCache.isTranslate = true
+		// // clearInterval(intervalNum)
+		// goTranslateAndInsert(captionInfo)
+	// }
 }
 
-export default function initTranslate(isTranslate) {
+export function afterVideoReady(callback = () => {}) {
 	if (intervalNum) clearInterval(intervalNum)
 
 	intervalNum = setInterval(() => {
-		// console.log('detecting <video>...')
-		if (!isTranslate) {
-			captionCache.isTranslate = false
-			clearInterval(intervalNum)
-			return resetCaption()
-		}
-
-
-		// use cn cache
-		if (captionCache.cn.length) {
-			captionCache.isTranslate = true
-			clearInterval(intervalNum)
-			resetCaption()
-			return insertCaption(captionCache.cn, captionCache, [0, captionCache.en.length])
-		}
-		
 		const captionInfo = getCaptionInfo()
 		if (captionInfo) {
-			captionCache.isTranslate = true
 			clearInterval(intervalNum)
-			goTranslateAndInsert(captionInfo)
+			callback(captionInfo)
 		}
 	}, 500)
 
@@ -55,20 +92,13 @@ export default function initTranslate(isTranslate) {
 	}, 60 * 1000)
 }
 
-export function isTranslated() {
-	return !!captionCache.isTranslate
+export function startTranslate(captionInfo) {
+	captionCache.isTranslate = true
+	goTranslateAndInsert(captionInfo)
 }
 
-function resetCaption() {
-	const tt = getTextTrack(captionCache.vtts)
-	 // Array.from(captionCache.vtts).find(tt => tt.language === 'en')
-	const cues = Array.from(tt.cues)
-	// const cues = Array(captionCache.tt.cues)
-	cues.forEach((c, idx) => {
-		c.text = captionCache.en[idx]
-	})
-
-	// setTimeout(resetCaption, 2000) // ensure reset caption
+export function isTranslated() {
+	return !!captionCache.isTranslate
 }
 
 function goTranslateAndInsert(captionInfo, captionIndexRange = [0, 0]) {
@@ -93,6 +123,18 @@ function goTranslateAndInsert(captionInfo, captionIndexRange = [0, 0]) {
 				goTranslateAndInsert(captionInfo, [captionIndexEnd ,captionIndexEnd])
 			}
 		})
+}
+
+function resetCaption() {
+	const tt = getTextTrack(captionCache.vtts)
+	 // Array.from(captionCache.vtts).find(tt => tt.language === 'en')
+	const cues = Array.from(tt.cues)
+	// const cues = Array(captionCache.tt.cues)
+	cues.forEach((c, idx) => {
+		c.text = captionCache.en[idx]
+	})
+
+	// setTimeout(resetCaption, 2000) // ensure reset caption
 }
 
 function insertCaptionCache(vtts) {
