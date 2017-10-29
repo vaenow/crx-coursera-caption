@@ -73,7 +73,7 @@ function handleSwitchLayout({checked}, response) {
 function handleSwitchTranslate({checked}, response) {
 
 	if(checked !== isTranslated()) {
-		translate()
+		translate(checked)
 	}
 
 	let store = getStore()
