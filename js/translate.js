@@ -14,19 +14,23 @@ window.tjs2 = tjs
 
 const MAX_T_LEN = 4000
 
-const intervalNum = setInterval(() => {
-	// console.log('detecting <video>...')
-	const captionInfo = getCaptionInfo()
-	if (captionInfo) {
-		clearInterval(intervalNum)
-		goTranslateAndInsert(captionInfo)
-	}
-}, 500)
+// initTranslate()
 
-setTimeout(() => {
-	// No video
-	clearInterval(intervalNum)
-}, 60 * 1000)
+export default function initTranslate() {
+	const intervalNum = setInterval(() => {
+		// console.log('detecting <video>...')
+		const captionInfo = getCaptionInfo()
+		if (captionInfo) {
+			clearInterval(intervalNum)
+			goTranslateAndInsert(captionInfo)
+		}
+	}, 500)
+
+	setTimeout(() => {
+		// No video
+		clearInterval(intervalNum)
+	}, 60 * 1000)
+}
 
 function goTranslateAndInsert(captionInfo, captionIndexRange = [0, 0]) {
 	// console.log('goTranslateAndInsert', captionIndexRange)

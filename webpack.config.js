@@ -7,7 +7,7 @@ module.exports = {
   context: __dirname,
   devtool: debug ? "inline-sourcemap" : null,
   entry: {
-    app: "./js/app.js",
+    // app: "./js/app.js",
     contentScript: "./js/contentscript.js",
   },
   output: {
@@ -37,6 +37,8 @@ module.exports = {
       {from: 'css', to: 'css'},
       {from: 'js', to: 'js'}
     ], {ignore: [
+      'translate.js',
+      'layout.js',
       'app.js',
       '*.gif',
       '.DS_Store',
