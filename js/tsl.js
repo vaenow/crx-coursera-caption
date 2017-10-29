@@ -6,20 +6,21 @@ const tjs = require('translation.js')
 
 const MAX_T_LEN = 4000
 let intervalNum = 0
-let captionCache = {
+let captionCacheDefault = JSON.stringify({
 	isTranslate: false,
 	vtts: {},
 	en: [],
 	cn: [],
-};
+});
+let captionCache = JSON.parse(captionCacheDefault);
 
 export default function tsl(isTranslate) {
 	if (!isTranslate) { // clean cn translate
 		captionCache.isTranslate = false
-		return resetCaption()
+		return cleanCaption()
 	} else if (captionCache.cn.length) { // use cn cache
 		captionCache.isTranslate = true
-		resetCaption()
+		cleanCaption()
 		return insertCaption(captionCache.cn, captionCache, [0, captionCache.en.length])
 	} else { // start caption
 		const captionInfo = getCaptionInfo()
@@ -75,7 +76,11 @@ function goTranslateAndInsert(captionInfo, captionIndexRange = [0, 0]) {
 		})
 }
 
-function resetCaption() {
+export function resetCaption() {
+	captionCache = JSON.parse(captionCacheDefault)
+}
+
+function cleanCaption() {
 	const tt = getTextTrack(captionCache.vtts)
 	const cues = Array.from(tt.cues)
 	cues.forEach((c, idx) => {

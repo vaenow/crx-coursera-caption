@@ -6,7 +6,8 @@ import startLayout, {isSwitched} from './layout'
 import translate, {
 	isTranslated,
 	startTranslate,
-	afterVideoReady
+	afterVideoReady,
+	resetCaption,
 } from './tsl'
 
 chrome.runtime.onMessage.addListener(function({
@@ -29,6 +30,7 @@ chrome.runtime.onMessage.addListener(function({
 	}
 });
 
+initSavedConfig()
 function initSavedConfig() {
 	afterVideoReady((captionInfo) => {
 		const store = getStore()
@@ -41,7 +43,23 @@ function initSavedConfig() {
 	})
 }
 
-initSavedConfig()
+// let currentPage = ''
+listenUrlChange()
+let urlChangeNum = 0
+function listenUrlChange() {
+	let currentPage = window.location.href;
+	clearInterval(urlChangeNum)
+	urlChangeNum = setInterval(function() {
+		if (currentPage != window.location.href) {
+			currentPage = window.location.href;
+			// location.reload()
+			clearInterval(urlChangeNum)
+			listenUrlChange()
+			resetCaption()
+			initSavedConfig()
+		}
+	}, 50);
+}
 
 // ======================= // Utils
 var STORE = 'coursera'
