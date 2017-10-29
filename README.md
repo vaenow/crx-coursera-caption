@@ -1,5 +1,7 @@
 # crx-coursera-caption
-A friendly UI layout for Coursera caption
+☑️ Translate caption English into Chinese
+
+☑️ A friendly UI layout for Coursera caption
 
 ### Chrome Extension
 ![webstore](https://ssl.gstatic.com/chrome/webstore/images/chrome_webstore_ongray_32.png)
