@@ -1,36 +1,18 @@
+/**
+* @date 2017-10-29
+* @author LuoWen
+**/
 var LAYOUT = 'input[name="layout"]'
 var TRANSLATE = 'input[name="translate"]'
   // Once the DOM is ready...
 window.addEventListener('DOMContentLoaded', function() {
-  // var skipRemove = window.localStorage.get('skipRemove')
-  // setDOMInfo(skipRemove)
-  // $("input").bootstrapSwitch({
-  //   onSwitchChange: function(event, data) {
-  //     console.log('onSwitchChange:', event, data)
-  //   }
-  // });
-  // document.getElementById('check').addEventListener('click', parseImg);
-  // document.getElementById('translate').addEventListener('click', switchTranslate);
   $(LAYOUT).bootstrapSwitch({
     onSwitchChange: switchLayout
   })
-  //.on('switch-change', switchLayout)
   $(TRANSLATE).bootstrapSwitch({
     onSwitchChange: switchTranslate
   })
-  //.on('switch-change', switchTranslate)
-
   getWebStore()
-  // var store = JSON.parse(localStorage.getItem(STORE) || "{}")
-  // if (store.layout) {
-  //   $(LAYOUT).click()
-  // }
-  // if (store.translate) {
-  //   if (store.translate.auto) {
-  //     $(TRANSLATE).click()
-  //   }
-  // }
-
 });
 
 // ======================= // Utils
@@ -59,21 +41,6 @@ function messager(msg) {
 }
 
 // ======================= //
-
-// function setDOMInfo(resp) {
-//   // var info = skipRemove ? '跳转'
-//   // var respMsg = 'Switching...';
-//   // if (typeof resp === 'string') {
-//   //   respMsg = resp;
-//   //   $('#check').addClass('btn-primary')
-//   // }
-//   // document.getElementById('check').innerHTML = respMsg;
-// }
-
-// function setAutoTranslate(resp) {
-
-// }
-
 
 function getWebStore() {
   messager({

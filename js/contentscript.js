@@ -1,3 +1,7 @@
+/**
+* @date 2017-10-29
+* @author LuoWen
+**/
 import startLayout, {isSwitched} from './layout'
 import translate, {
 	isTranslated,
