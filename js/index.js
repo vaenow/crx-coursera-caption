@@ -33,6 +33,8 @@ window.addEventListener('DOMContentLoaded', function() {
 
 });
 
+// ======================= // Utils
+
 function messager(msg) {
   var from = msg.from || "";
   var subject = msg.subject || {};
@@ -49,12 +51,15 @@ function messager(msg) {
         from: from,
         subject: JSON.stringify(subject)
       },
-      function(resp) {
+      function(resp = "") {
         afterSend(JSON.parse(resp))
       }
     );
   })
 }
+
+// ======================= //
+
 function setDOMInfo(resp) {
   // var info = skipRemove ? '跳转'
   // var respMsg = 'Switching...';
@@ -84,19 +89,19 @@ function initPopupShow(store) {
   $(TRANSLATE).bootstrapSwitch('state', store.translate.checked)
 }
 
-function switchLayout() {
+function switchLayout(evt, checked) {
   messager({
     from: 'switchLayout',
-    subject: {checked: true},
+    subject: {checked},
     beforeSend: setDOMInfo,
     afterSend: setDOMInfo
   })
 }
 
-function switchTranslate() {
+function switchTranslate(evt, checked) {
   messager({
-    from: 'translate',
-    subject: {checked: true},
+    from: 'switchTranslate',
+    subject: {checked},
     afterSend: setAutoTranslate
   })
 }
