@@ -1,5 +1,5 @@
 import startLayout, {isSwitched} from './layout'
-import translate from './translate'
+import translate, {isTranslated} from './tsl'
 
 chrome.runtime.onMessage.addListener(function({
 	from,
@@ -55,7 +55,10 @@ function handleGetWebStore({checked}, response) {
 
 function handleSwitchLayout({checked}, response) {
 
-	startLayout(isSwitched())
+	const switched = isSwitched()
+	if (checked !== switched){
+		startLayout(switched)
+	}
 
 	let store = getStore()
 	store.layout.checked = checked;
@@ -69,7 +72,9 @@ function handleSwitchLayout({checked}, response) {
 
 function handleSwitchTranslate({checked}, response) {
 
-	translate()
+	if(checked !== isTranslated()) {
+		translate()
+	}
 
 	let store = getStore()
 	store.translate.checked = checked;

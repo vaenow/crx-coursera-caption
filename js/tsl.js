@@ -14,7 +14,10 @@ window.tjs2 = tjs
 
 const MAX_T_LEN = 4000
 
-// initTranslate()
+let captionCache = {
+	en: [],
+	cn: [],
+}
 
 export default function initTranslate() {
 	const intervalNum = setInterval(() => {
@@ -30,6 +33,10 @@ export default function initTranslate() {
 		// No video
 		clearInterval(intervalNum)
 	}, 60 * 1000)
+}
+
+export function isTranslated() {
+	return !!captionCache.cn.length
 }
 
 function goTranslateAndInsert(captionInfo, captionIndexRange = [0, 0]) {
@@ -53,6 +60,16 @@ function goTranslateAndInsert(captionInfo, captionIndexRange = [0, 0]) {
 		})
 }
 
+function insertCaptionCache(vtts) {
+	Array.from(vtts).forEach(tt => {
+		captionCache[tt.language] = []
+		Array.from(tt.cues).forEach(c => {
+			captionCache[tt.language].push(c.text)
+		})
+	})
+	// console.log('captionCache', Object.assign({}, captionCache))
+	console.log('captionCache', captionCache)
+}
 function getCaptionInfo() {
 	let content = "no caption"
 	try {
@@ -60,6 +77,7 @@ function getCaptionInfo() {
 		var ve = $('video')[0]
 		var vtts = ve.textTracks
 		var tt = Array.from(vtts).find(tt => tt.language === 'en')
+		insertCaptionCache(vtts)
 		var captions = Array.from(tt.cues).map((c, idx) =>
 			(idx !==0 ? `%%${idx}&&` : '') + c.text
 		)
@@ -89,7 +107,10 @@ function insertCaption(result, {vtts, SEPARATOR, tt}, captionIndexRange) {
 
 	for (let i = captionIndexRange[0]; i<captionIndexRange[1]; i++) {
 		// console.log('cues[i]', i)
-		cues[i].text += `\n${findProperCaption(i, captions)}`
+		const properCaption = findProperCaption(i, captions)
+		cues[i].text += `\n${properCaption}`
+
+		captionCache.cn.push(properCaption)
 	}
 }
 
