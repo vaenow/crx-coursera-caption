@@ -2,8 +2,7 @@
   "name": "Coursera Caption",
   "version": "1.2.1",
   "manifest_version": 2,
-  "description": "✅ 字幕自动翻译成中文
-✅ 重新布局Coursera，便于视频和字幕同步",
+  "description": "✅ 双语字幕 \n✅ 重新布局课程界面",
   "icons": {
     "128": "img/snow-128.png"
   },
