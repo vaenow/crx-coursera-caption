@@ -40,7 +40,8 @@ module.exports = {
       'translate.js',
       'layout.js',
       'app.js',
-      '*.gif',
+      'Coursera*.png',
+      'Coursera*.gif',
       '.DS_Store',
     ]}),
     new CleanWebpackPlugin(['dist'])

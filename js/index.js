@@ -51,7 +51,7 @@ function getWebStore() {
 }
 
 function initPopupShow(store) {
-  console.log('initPopupShow', store)
+  // console.log('initPopupShow', store)
   $(LAYOUT).bootstrapSwitch('state', store.layout.checked)
   $(TRANSLATE).bootstrapSwitch('state', store.translate.checked)
 }
