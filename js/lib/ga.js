@@ -38,18 +38,13 @@ export default function (forceReset) {
         type: 'text/javascript',
         name: 'crx',
     }, (GA_CONTENT + PAGE_VIEW));
+    tick();
 
     // Keep ga alive
     clearInterval(interval.num);
     interval.currentCnt = 0;
     interval.num = setInterval(function () {
-        // window.ga && window.ga('send', 'pageview');
-        $('script[name=ga]').remove();
-        addScript({
-            type: 'text/javascript',
-            name: 'ga',
-        }, TICK_EVENT.replace(/ARGS/, $('.c-ph-username').html()));
-        // console.log(`GA window.ga('send', 'pageview');`, JSON.stringify(interval))
+        tick();
         if(++interval.currentCnt > interval.MAX_CNT) {
             clearInterval(interval.num);
             interval.currentCnt = 0;
@@ -70,6 +65,16 @@ export default function (forceReset) {
     //     .attr('crx')
     //     .text(GA_CONTENT)
     //     .appendTo('head');
+}
+
+function tick() {
+    // window.ga && window.ga('send', 'pageview');
+    $('script[name=ga]').remove();
+    addScript({
+        type: 'text/javascript',
+        name: 'ga',
+    }, TICK_EVENT.replace(/ARGS/, $('.c-ph-username').html()));
+    // console.log(`GA window.ga('send', 'pageview');`, JSON.stringify(interval))
 }
 
 function addScript(attribute, text, callback) {
