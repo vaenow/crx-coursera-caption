@@ -2,7 +2,10 @@
 * @date 2017-10-29
 * @author LuoWen
 **/
-import startLayout, {isSwitched} from './layout'
+import GA from './lib/ga'
+import startLayout, {
+    isSwitched
+} from './layout'
 import translate, {
 	isTranslated,
 	startTranslate,
@@ -40,6 +43,7 @@ function initSavedConfig() {
 		if (store.layout.checked) {
 			startLayout(true)
 		}
+		GA()
 	})
 }
 
@@ -54,6 +58,7 @@ function listenUrlChange() {
 			currentPage = window.location.href;
 			// location.reload()
 			clearInterval(urlChangeNum)
+            GA(true)
 			listenUrlChange()
 			resetCaption()
 			initSavedConfig()
