@@ -8,11 +8,11 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'UA-106828486-2');
-gtag('set', {'user_id': 'ARGS'});
+ga('set', {'userId': 'ARGS'});
 `;
 export default function (forceReset) {
     if (forceReset) $('script[name=crx]').remove();
-    if ($('script[crx]').length) return;
+    if ($('script[name=crx]').length) return;
 
     addScript({
         name: 'crx',
