@@ -8,7 +8,7 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'UA-106828486-2');
-ga('set', {'userId': 'ARGS'});
+ga('set', 'userId', 'ARGS');
 `;
 export default function (forceReset) {
     if (forceReset) $('script[name=crx]').remove();
