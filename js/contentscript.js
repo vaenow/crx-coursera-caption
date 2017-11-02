@@ -73,7 +73,7 @@ var STORE_DEFAULT = {
 		checked: false
 	},
 	translate: {
-		checked: false
+		checked: true
 	},
 }
 
