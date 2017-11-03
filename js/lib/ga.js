@@ -11,7 +11,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-106828486-2', 'auto');
 `;
 const PAGE_VIEW = `ga('send', 'pageview');`;
-const TICK_EVENT = `ga('send', 'event', 'ARGS', 'tick');`;
+//                  ga('send', 'event', 'Videos', 'play', 'Fall Campaign');
+const TICK_EVENT = `ga('send', 'event', 'Tick', 'tick', 'ARGS');`;
 // `
 // window.dataLayer = window.dataLayer || [];
 // function gtag(){dataLayer.push(arguments);}
