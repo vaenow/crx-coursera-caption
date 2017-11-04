@@ -112,7 +112,7 @@ function getCaptionInfo() {
 		var tt = getTextTrack(vtts)
 		insertCaptionCache(vtts)
 		var captions = Array.from(tt.cues).map((c, idx) =>
-			(idx !==0 ? `%%${idx}&&` : '') + c.text
+			(idx !==0 ? `&&${idx}%%` : '') + c.text
 		)
 
 		if(!captions.length) return false
@@ -133,7 +133,7 @@ function go(content) {
 
 function insertCaption(result, {vtts, SEPARATOR, tt}, captionIndexRange) {
 	const content = result.join('')
-	const captions = content.split("%%")
+	const captions = content.split("&&")
 	// console.log('captions', captions)
 
 	for (let i = captionIndexRange[0]; i<captionIndexRange[1]; i++) {
@@ -146,7 +146,7 @@ function insertCaption(result, {vtts, SEPARATOR, tt}, captionIndexRange) {
 function findProperCaption(index, captions) {
 	let caption = captions.find(caption => caption && caption.trim().startsWith(index))
 	if (caption) {
-		return caption.trim().replace(/^.*?&&/, '')
+		return caption.trim().replace(/^.*?%%/, '')
 	}
 	return ''
 }

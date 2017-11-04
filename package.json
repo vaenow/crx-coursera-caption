@@ -1,6 +1,6 @@
 {
   "name": "crx-coursera-caption",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "✅ 双语字幕 \n✅ 重新布局课程界面",
   "main": "index.js",
   "scripts": {

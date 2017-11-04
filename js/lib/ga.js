@@ -72,9 +72,11 @@ function tick() {
     // window.ga && window.ga('send', 'pageview');
     $('script[name=ga]').remove();
     addScript({
-        type: 'text/javascript',
-        name: 'ga',
-    }, TICK_EVENT.replace(/ARGS/, $('.c-ph-username').html()));
+            type: 'text/javascript',
+            name: 'ga',
+        }, TICK_EVENT.replace(/ARGS/,
+        $('<p></p>').html($('.c-ph-username').html()).text())
+    );
     // console.log(`GA window.ga('send', 'pageview');`, JSON.stringify(interval))
 }
 

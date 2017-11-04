@@ -37,3 +37,10 @@
 .container-course > button {
 	margin-top: 5px;
 }
+
+.vjs-has-started .vjs-control-bar {
+	opacity: 0.7 !important;
+}
+.vjs-progress-control.vjs-control {
+	opacity: 0.7 !important;
+}
