@@ -133,8 +133,8 @@ function go(content) {
 
 function insertCaption(result, {vtts, SEPARATOR, tt}, captionIndexRange) {
 	const content = result.join('')
-		.replace("＆＆", "&&")
-		.replace("％％", "%%")
+		.replace(/＆＆/g, "&&")
+		.replace(/％％/g, "%%")
 	const captions = content.split("&&")
 	// console.log('captions', captions)
 
