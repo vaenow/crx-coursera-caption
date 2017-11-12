@@ -133,7 +133,9 @@ function go(content) {
 
 function insertCaption(result, {vtts, SEPARATOR, tt}, captionIndexRange) {
 	const content = result.join('')
-	const captions = content.split(/&&|＆＆/g)
+		.replace("＆＆", "&&")
+		.replace("％％", "%%")
+	const captions = content.split("&&")
 	// console.log('captions', captions)
 
 	for (let i = captionIndexRange[0]; i<captionIndexRange[1]; i++) {
