@@ -148,7 +148,10 @@ function insertCaption(result, {vtts, SEPARATOR, tt}, captionIndexRange) {
 function findProperCaption(index, captions) {
 	let caption = captions.find(caption => caption && caption.trim().startsWith(index))
 	if (caption) {
-		return caption.trim().replace(/^.*?%%/, '')
+		return caption.trim()
+			.replace(/^.*?%%/, '')
+			.replace(/\d+\s*?%%/g, '')
+			.replace(/%%/g, '')
 	}
 	return ''
 }
