@@ -44,7 +44,7 @@ function initSavedConfig() {
 			startLayout(true)
 		}
 		GA()
-	})
+	}, () => GA())
 }
 
 // let currentPage = ''

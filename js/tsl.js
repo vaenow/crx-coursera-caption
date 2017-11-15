@@ -28,13 +28,15 @@ export default function tsl(isTranslate) {
 	}
 }
 
-export function afterVideoReady(callback = () => {}) {
+export function afterVideoReady(callback = () => {}, noVideo = () => {}) {
 	if (intervalNum) clearInterval(intervalNum)
 
+	let callbackInvoked = false
 	intervalNum = setInterval(() => {
 		const captionInfo = getCaptionInfo()
 		if (captionInfo) {
 			clearInterval(intervalNum)
+			callbackInvoked = true
 			callback(captionInfo)
 		}
 	}, 500)
@@ -42,6 +44,9 @@ export function afterVideoReady(callback = () => {}) {
 	setTimeout(() => {
 		// No video
 		clearInterval(intervalNum)
+		if (!callbackInvoked) {
+			noVideo()
+		}
 	}, 60 * 1000)
 }
 
