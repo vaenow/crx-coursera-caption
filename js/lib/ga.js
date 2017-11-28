@@ -47,7 +47,8 @@ function tick() {
     addScript({
             type: 'text/javascript',
             name: 'ga',
-        }, makeTickEvent()
+        },
+        makeTickEvent()
     );
     // console.log(`GA window.ga('send', 'pageview');`, JSON.stringify(interval))
 }
@@ -56,7 +57,7 @@ function makeTickEvent() {
     let tickEvent = "";
     const store = getStore();
     for( const k in store) {
-        tickEvent += TICK_EVENT.replace(/ACTION/, k).replace(/ARGS/, store[k])
+        tickEvent += TICK_EVENT.replace(/ACTION/, k).replace(/ARGS/, store[k].checked)
     }
     return tickEvent;
 }
