@@ -2,6 +2,11 @@
 * @date 2017-10-29
 * @author LuoWen
 **/
+import {
+    getStore,
+    updateStore,
+    responseWrapper
+} from './utils'
 import GA from './lib/ga'
 import startLayout, {
     isSwitched
@@ -64,31 +69,6 @@ function listenUrlChange() {
 			initSavedConfig()
 		}
 	}, 50);
-}
-
-// ======================= // Utils
-var STORE = 'coursera'
-var STORE_DEFAULT = {
-	layout: {
-		checked: false
-	},
-	translate: {
-		checked: true
-	},
-}
-
-function responseWrapper(response) {
-	return function(msg) {
-		return response(JSON.stringify(msg))
-	}
-}
-
-function getStore() {
-	return JSON.parse(localStorage.getItem(STORE)) || STORE_DEFAULT
-}
-
-function updateStore(store) {
-	localStorage.setItem(STORE, JSON.stringify(store))
 }
 
 // ======================= // Handle
