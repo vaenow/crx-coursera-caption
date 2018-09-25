@@ -1,6 +1,6 @@
 {
   "name": "crx-coursera-caption",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "✅ 双语字幕 ✅ 重新布局课程界面 ✅ Translate coursera video subtitles ✅ Design layout UI",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "babel-preset-es2015": "^6.24.1",
     "bootstrap-switch": "^3.3.4",
     "google-translate-api": "^2.3.0",
-    "translation.js": "^0.6.4"
+    "translation.js": "^0.7.5"
   },
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.17",

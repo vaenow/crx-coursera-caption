@@ -67,7 +67,7 @@ function goTranslateAndInsert(captionInfo, captionIndexRange = [0, 0]) {
 		content += caption
 		captionIndexRange[1]++
 	}
-	
+
 	go.call(this, content)
 		.then(resp => {
 			resp.result.forEach(result => captionCache.cn.push(result))
@@ -132,6 +132,7 @@ function getCaptionInfo() {
 
 function go(content) {
 	return tjs
+		.google
 		.translate(content.toLowerCase())
 		.then(resp => resp)
 }
