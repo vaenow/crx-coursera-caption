@@ -60,6 +60,9 @@ export function isTranslated() {
 }
 
 function goTranslateAndInsert(captionInfo, captionIndexRange = [0, 0]) {
+
+  forceInsertVideoCss()
+
 	let content = ''
 	for (let i = captionIndexRange[0]; i < captionInfo.captions.length; i++) {
 		const caption = captionInfo.captions[i];
@@ -117,7 +120,8 @@ function getCaptionInfo() {
 		var tt = getTextTrack(vtts)
 		insertCaptionCache(vtts)
 		var captions = Array.from(tt.cues).map((c, idx) =>
-			(idx !==0 ? `&&${idx}%%` : '') + c.text
+			// (idx !==0 ? `&&${idx}%%` : '') + c.text
+			` &&${idx}%% `+ c.text
 		)
 
 		if(!captions.length) return false
@@ -133,7 +137,7 @@ function getCaptionInfo() {
 function go(content) {
 	return tjs
 		.google
-		.translate(content.toLowerCase())
+		.translate(content/*.toLowerCase()*/)
 		.then(resp => resp)
 }
 
@@ -143,11 +147,14 @@ function insertCaption(result, {vtts, SEPARATOR, tt}, captionIndexRange) {
 		.replace(/％％/g, "%%")
 	const captions = content.split("&&")
 	// console.log('captions', captions)
+  const cueTextList = $('div[data-cue]')
 
 	for (let i = captionIndexRange[0]; i<captionIndexRange[1]; i++) {
 		// console.log('cues[i]', i)
 		const properCaption = findProperCaption(i, captions)
 		tt.cues[i].text += `\n${properCaption}`
+    const cueText = cueTextList.eq(i)
+    cueText.html(`${cueText.html()} <span class="tsl-cn">${properCaption}</span>`)
 	}
 }
 
@@ -162,3 +169,11 @@ function findProperCaption(index, captions) {
 	return ''
 }
 
+/**
+ * 强制添加video css
+ */
+function forceInsertVideoCss() {
+  if ($('style[name=crx]').length) return;
+
+  $('head').append($(`<style name='crx'>.content-container video::-webkit-media-text-track-display {transform: translateY(-70px);opacity: 0.9;}</style>`))
+}
